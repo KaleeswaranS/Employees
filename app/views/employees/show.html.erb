@@ -1,0 +1,335 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<style type="text/css">
+
+  #wrapper {
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+  }
+
+  #wrapper.toggled {
+      padding-left: 250px;
+  }
+
+  #sidebar-wrapper {
+      z-index: 1000;
+      position: fixed;
+      left: 250px;
+      width: 0;
+      height: 100%;
+      margin-left: -250px;
+      overflow-y: auto;
+      background: #4CB5F5;
+      -webkit-transition: all 0.5s ease;
+      -moz-transition: all 0.5s ease;
+      -o-transition: all 0.5s ease;
+      transition: all 0.5s ease;
+  }
+
+  #wrapper.toggled #sidebar-wrapper {
+      width: 250px;
+
+  }
+
+  #page-content-wrapper {
+      width: 100%;
+      position: absolute;
+      padding: 15px;
+  }
+
+  #wrapper.toggled #page-content-wrapper {
+      position: absolute;
+      margin-right: -250px;
+  }
+
+  /* Sidebar Styles */
+
+  .sidebar-nav {
+      position: absolute;
+      top: 0px;
+      width: 230px;
+      margin: 0;
+      padding: 20px;
+      list-style: none;
+  }
+
+  .sidebar-nav li {
+      text-indent: 20px;
+      line-height: 30px;
+  }
+
+  .sidebar-nav li a {
+      display: block;
+      text-decoration: none;
+      color: white;
+  }
+
+  .sidebar-nav li a:hover {
+      text-decoration: none;
+      color: #fff;
+      background: rgba(255,255,255,0.2);
+  }
+
+
+  .sidebar-wrapper .sidebar-menu ul li:hover > a,
+  .sidebar-wrapper .sidebar-menu .sidebar-dropdown.active > a {
+    color: #b3b8c1;
+  }
+
+  .sidebar-wrapper .sidebar-menu ul li a i {
+    margin-right: 10px;
+    font-size: 22px;
+    background: #2b2b2b;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 4px;
+  }
+
+  .sidebar-wrapper .sidebar-menu ul li a:hover > i::before {
+    /*display: inline-block;*/
+    animation: swing ease-in-out 0.5s 1 alternate;
+  }
+
+  .sidebar-wrapper .sidebar-menu .sidebar-dropdown div {
+    background: #2b2b2b;
+  }
+  .sidebar-wrapper .sidebar-menu .sidebar-dropdown > a:after {
+    content: "\f105";
+    font-family: FontAwesome;
+    font-weight: 400;
+    font-style: normal;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    background: 0 0;
+    speak: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    position: absolute;
+    right: 15px;
+    top: 14px;
+  }
+  .sidebar-wrapper .sidebar-menu .sidebar-dropdown .sidebar-submenu ul {
+    padding: 5px 0;
+  }
+
+  .sidebar-wrapper .sidebar-menu .sidebar-dropdown .sidebar-submenu li {
+    padding-left: 25px;
+    font-size: 22px;
+  }
+
+  .sidebar-wrapper .sidebar-menu .sidebar-dropdown .sidebar-submenu li a:before {
+    content: "\f10c";
+    font-family: FontAwesome;
+    font-weight: 400;
+    font-style: normal;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    speak: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin-right: 10px;
+    font-size: 10px;
+  }
+
+  .sidebar-wrapper .sidebar-menu ul li a span.label,
+  .sidebar-wrapper .sidebar-menu ul li a span.badge {
+    float: right;
+    margin-top: 8px;
+    margin-left: 5px;
+  }
+
+  .sidebar-wrapper .sidebar-menu .sidebar-dropdown .sidebar-submenu li a .badge,
+  .sidebar-wrapper .sidebar-menu .sidebar-dropdown .sidebar-submenu li a .label {
+    float: right;
+    margin-top: 0px;
+  }
+  .employee-form {
+    width: 340px;
+      margin: 50px auto;
+  }
+  .employee-form form{
+    margin-bottom: 15px;
+      background: white;
+      box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+      padding: 30px;
+  }
+  
+  .form-control, .btn {
+      min-height: 38px;
+      border-radius: 2px;
+
+  }
+  .form-group {
+    height: 63px;
+  }
+  .btn {        
+    padding: 10px 20px 11px !important;
+    font-size: 22px !important;
+    background-color: #F36C8C;
+    font-weight: bold;
+    text-shadow: 1px 1px #F36C8C;
+    color: #ffffff;
+    border-radius: 100px;
+    -moz-border-radius: 100px;
+    -webkit-border-radius: 100px;
+    border: 1px solid #F36C8C;
+    cursor: pointer;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+    -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+    -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+  }
+  .navbar {
+    border-radius:0px;
+  }
+  
+  .navbar-brand {
+     float: left;
+     padding: 14px 0px;
+     font-size: 22px;
+  }
+  
+  .h4, h4{
+    font-size: 22px;
+  }
+
+  .navbar {
+    position: relative;
+    min-height: 66px
+    margin-bottom: 20px;
+    border: 1px solid;
+  }
+  .navbar-right{
+    margin-right: 0px;
+    padding: 18px;
+    font-size: 22px;
+  }
+  .navbar-inverse{
+    background-color: #4CB5F5;
+  }
+  .navbar a {
+    color: white;
+  }
+  .btn {
+    background-color: #4CB5F5;
+  }
+  .input-group{
+    width: 290px;
+  }
+  .placeholder {
+    text-decoration-color: black;
+  }
+  label {
+    text-align: left;
+     
+  }
+@media (min-width: 992px){
+  .cal-md-4 {
+    width: 103%;
+    float: left;
+  }
+
+  #wrapper {
+      padding-left: 250px;
+  }
+
+  #wrapper.toggled {
+      padding-left: 0;
+  }
+
+  #sidebar-wrapper {
+    width: 250px;
+    margin: -20px;
+    margin-left: -253px;
+  }
+
+  #wrapper.toggled #sidebar-wrapper {
+      width: 0;
+  }
+
+  #page-content-wrapper {
+      padding: 20px;
+      position: relative;
+  }
+
+  #wrapper.toggled #page-content-wrapper {
+      position: relative;
+      margin-right: 0;
+  }
+}
+</style>
+</head>
+
+<body>
+  <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+      <a class="navbar-brand" href="/dashboard#" style="color: white;"><span class="glyphicon glyphicon-leaf w3-xxlarge" style="width:15; margin-right: 5px;"></span> SK Solution</a>
+      
+      <div class="navbar-right" style="margin-right: 15px; padding: 6px;">
+          <a href="/employees"><span class="glyphicon glyphicon-off w3-xxlarge" style="width:13; margin-right: 0px;"></span>Logout</a>
+      </div>
+  </nav>
+
+   <div id="wrapper" >
+    <div id="sidebar-wrapper" style="font-size: 18px;">
+        <ul class="sidebar-nav">
+          
+          <li>
+            <a href="/project"><i class="glyphicon glyphicon-credit-card" style="margin-right: 7px; icon-color; cornsilk; margin-left: -35px;"></i>Projects</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <p id="notice"><%= notice %></p>
+  <!-- <p id="notice"><%= notice %></p> -->
+  <h4 style="text-align:center;"> 
+	<p>
+	  <b>Name:</b>
+	  <%= @employees.name %>
+	</p>
+	 
+	<p>
+	  <b>Email:</b>
+	  <%= @employees.email %>
+	</p>
+	 
+	<p>
+	  <b>Qualification:</b>
+	  <%= @employees.qualification %>
+	</p>
+	 
+	 <p>
+	  <b>DOB:</b>
+	  <%= @employees.dob %>
+	</p>
+	 
+	<p>
+	  <b>Project:</b>
+	  <%= @employees.project %>
+	</p>
+	 
+	<p>
+	  <b>Mobile Number:</b>
+	  <%= @employees.mobile_number %>
+	</p>
+</h4>
+	 
+</body>
+</html>
+

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<!-- <html lang="en"> -->
+<html>
+<head>
+  <title>ChartKick</title>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
+  <%= javascript_include_tag "http://www.google.com/jsapi", "chartkick" %>
+  <%= csrf_meta_tags %>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body >
+  <div class="container">
+    <% flash.each do |name,msg| %>
+      <div class="alert-bottom alert alert-<%= name %>" id="custom-alert-msg">
+        <button type="button" class="close" data-dismiss="alert">x</button>
+        <%= msg %>
+      </div>
+    <% end %>
+    <%= yield %>
+  </div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!-- <!DOCTYPE HTML>
+<html>
+<head>
+  <script type="text/javascript">
+  window.onload = function () {
+    var chart = new CanvasJS.Chart("chartContainer", {
+
+      title:{
+        text: "Employees Profiles Chart"              
+      },
+      data: [              
+        { 
+         type: "column",
+         dataPoints: [
+         { label: "suman", y: MedLife},
+         { label: "kaleez", y: MedLife },
+         { label: "karthi", y: Loyds },                                    
+         ]
+       }
+       ]
+     });
+
+    chart.render();
+  }
+  </script>
+  <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</head>
+<body>
+  <div id="chartContainer" style="height: 300px; width: 100%;">
+  </div>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
+  <%= javascript_include_tag "http://www.google.com/jsapi", "chartkick" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div class="container">
+    <%= yield %>
+  </div>
+<div class="row" style="width:70%;">
+  <div class="col-xs-6">
+    <%= column_chart @employee.group(:name).count %>
+  </div>
+</div>
+</body>
+</html>

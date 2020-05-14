@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Signup</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+    function validate() {
+        var password = document.getElementById("Password").value;
+        var confirmPassword = document.getElementById("ConfirmPassword").value;
+        var email = document.getElementById('Email').value;
+        var atpos=email.indexOf("@");
+        var dotpos=email.lastIndexOf(".");
+
+
+        if (atpos<1 || dotpos<atpos+2 || dotpos+2>=email.length)
+          {
+          alert("Not a valid e-mail address");
+          return false;
+          }
+
+        if (password != confirmPassword) {
+            alert("Passwords do not match.");
+            return false;
+        }
+        return true;
+    }
+</script> 
+
+<!-- <script>
+  $(document).ready(function(){
+    $("#signup-form").hide();
+
+    $("#dashboardtoogle").click(function(){
+      $("#dashboard, #signup-form").toogle();
+    });
+  });
+
+  </script> -->
+
+<style type="text/css">
+  .signup-form {
+    width: 340px;
+      margin: 50px auto;
+  }
+    .signup-form form {
+      margin-bottom: 15px;
+        background: #f7f7f7;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        padding: 30px;
+    }
+    .signup-form h2 {
+        margin: 0 0 15px;
+    }
+    .form-control, .btn {
+        min-height: 38px;
+        border-radius: 2px;
+    }
+    .btn {        
+        font-size: 15px;
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+<div class="signup-form">
+    <form name="signup-form" action="/dashboard"  method="post">
+        <h2 class="text-center">Sign up</h2> 
+         <div class="form-group">
+          <label class="sr-only" for="exampleInputUsername">username</label>
+          <input type="username" name="customer[username]" class="form-control" id="Username" placeholder="Username" required>
+        </div>      
+        <div class="form-group">
+          <label class="sr-only" for="exampleInputEmail">email</label>
+          <input type="email" name="customer[email]" class="form-control" id="Email" placeholder="Email" required>
+        </div>
+        <div class="form-group">
+            <label class="sr-only" for="exampleInputPassword">password</label>
+            <input type="password" name="customer[password]" class="form-control" id="Password" placeholder="Password" required="required">
+        </div>
+          <div class="form-group">
+            <label class="sr-only" for="exampleInputConfirmPassword">confirm password</label>
+            <input type="password" name="customer[confirm_password]" class="form-control" id="ConfirmPassword" onkeyup="checkPasswordMatch();" placeholder="Confirm Password" required="required">
+        </div>
+        <div class="form-group">
+          <button type="submit" id= "dashboardtoogle" onclick="return validate()" class="btn btn-primary btn-block">Submit</button>
+        </div>  
+    </form>
+</div>
+</body>
+</html>                                                               

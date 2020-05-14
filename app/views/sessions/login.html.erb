@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Login Form</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- <script>
+  $(document).ready(function(){
+    $("#signup-form").hide();
+
+    $("#signuptoogle").click(function(){
+      $("#login-form, #signup-form").toogle();
+    });
+  });
+
+  </script> -->
+<style type="text/css">
+  .login-form {
+    width: 340px;
+      margin: 35px auto;
+  }
+    .login-form form {
+      margin-bottom: 15px;
+        background: #f7f7f7;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        padding: 30px;
+    }
+    .login-form h2 {
+        margin: 0 0 15px;
+    }
+    .form-control, .btn {
+        min-height: 38px;
+        border-radius: 2px;
+    }
+    .btn {        
+        font-size: 15px;
+        font-weight: bold;
+    }
+    .dropdown-menu {
+        position: absolute;
+        width: 302%;
+        padding: 25px;
+        background: #f7f7f7;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    } 
+    
+    .form-control, .btn {
+        min-height: 38px;
+        border-radius: 2px;
+    }
+    .btn {        
+        font-size: 15px;
+        font-weight: bold;
+    }
+    .dropdown-menu {
+        position: absolute;
+        width: 302%;
+        padding: 25px;
+        background: #f7f7f7;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    } 
+    .form .login-form {
+        display: none;
+    }
+    
+</style>
+</head>
+<body>
+<!-- <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+   <!--  <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+      </button>
+    </div> -->
+    <!-- <ul class="nav navbar-nav navbar-right">
+      <li><a href="/login">Logout</a></li>
+    </ul> -->   
+<!--    </div -->     
+<!-- </nav>  --> 
+<div class="login-form">
+    <form id="login-form" action="/dashboard" method="get">
+        <h2 class="text-center">Log in</h2>       
+         <div class="form-group">
+           <label class="sr-only" for="exampleInputEmail2">Email</label>
+           <input type="email" name="customer[email]" class="form-control" id="exampleInputEmail2" placeholder="Email" required>
+        </div>
+        <div class="form-group">
+            <input type="password" name="customer[password]" class="form-control" placeholder="Password" required="required">
+        </div>
+        <div class="clearfix">
+            <label class="pull-left checkbox-inline"><input type="checkbox"> Remember me</label>
+        </div><br/>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block">Log in</button>
+        </div> 
+        <div class="form-group"><br/>
+          <div class="d-flex justify-content-center links">
+            Don't have an account? <a href="signup"  id="signuptoogle" class="ml-2">Sign Up</a>
+    </div>
+    </div>   
+    </form>
+  </div>
+
+
+    <!-- <form id="signup-form">
+        <h2 class="text-center">Sign up</h2>       
+        <div class="form-group">
+          <label class="sr-only" for="exampleInputEmail2">Email address</label>
+          <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email address" required>
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" placeholder="Password" required="required">
+        </div>
+        <div class="clearfix">
+            <label class="pull-left checkbox-inline"><input type="checkbox"> Remember me</label>
+        </div><br/>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block">SignUp</button>
+        </div>      
+    </form> -->
+</div>
+</body>
+</html>                                                               

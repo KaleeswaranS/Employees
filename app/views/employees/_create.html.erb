@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ 
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Employee Form</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+<script type="text/javascript">
+    function validate() {
+      var email = document.getElementById('Email').value;
+      var atpos=email.indexOf("@");
+      var dotpos=email.lastIndexOf(".");
+
+      if (atpos<1 || dotpos<atpos+2 || dotpos+2>=email.length)
+        {
+        alert("Not a valid e-mail address");
+        return false;
+        }
+      return true;
+    }
+</script> 
+  <script language="JavaScript">
+    function validate() {
+        document.getElementById('display').innerHTML = 
+                    document.getElementById("employee-form").value;
+    }
+  </script>
+<script>
+    $(document).ready(function(){
+      var date_input=$('input[name="employee[dob]"]'); //our date input has the name "date"
+      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+      var options={
+        format: 'yyyy/mm/dd',
+        container: container,
+        todayHighlight: true,
+        autoclose: true,
+      };
+      date_input.datepicker(options);
+    })
+</script>
+
+ <script>
+  $(document).ready(function(){
+    $("#status-form").hide();
+
+    $("#statustoogle").click(function(){
+      $("#employee-form, #status-form").toogle();
+    });
+  });
+
+  </script>
+
+<style type="text/css">
+
+  #wrapper {
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+  }
+
+  #wrapper.toggled {
+      padding-left: 250px;
+  }
+
+  #sidebar-wrapper {
+      z-index: 1000;
+      position: fixed;
+      left: 250px;
+      width: 0;
+      height: 100%;
+      margin-left: -250px;
+      overflow-y: auto;
+      background: #002266;
+      -webkit-transition: all 0.5s ease;
+      -moz-transition: all 0.5s ease;
+      -o-transition: all 0.5s ease;
+      transition: all 0.5s ease;
+  }
+
+  #wrapper.toggled #sidebar-wrapper {
+      width: 250px;
+
+  }
+
+  #page-content-wrapper {
+      width: 100%;
+      position: absolute;
+      padding: 15px;
+  }
+
+  #wrapper.toggled #page-content-wrapper {
+      position: absolute;
+      margin-right: -250px;
+  }
+
+
+  .sidebar-nav {
+      position: absolute;
+      top: 0px;
+      width: 230px;
+      margin: 0;
+      padding: 20px;
+      list-style: none;
+  }
+
+  .sidebar-nav li {
+      text-indent: 20px;
+      line-height: 30px;
+  }
+
+  .sidebar-nav li a {
+      display: block;
+      text-decoration: none;
+      color: white;
+  }
+
+  .sidebar-nav li a:hover {
+      text-decoration: none;
+      color: #fff;
+      background: rgba(255,255,255,0.2);
+  }
+
+
+  .sidebar-wrapper .sidebar-menu ul li:hover > a,
+  .sidebar-wrapper .sidebar-menu .sidebar-dropdown.active > a {
+    color: #b3b8c1;
+  }
+
+  .sidebar-wrapper .sidebar-menu ul li a i {
+    margin-right: 10px;
+    font-size: 22px;
+    background: #2b2b2b;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 4px;
+  }
+
+  .sidebar-wrapper .sidebar-menu ul li a:hover > i::before {
+    /*display: inline-block;*/
+    animation: swing ease-in-out 0.5s 1 alternate;
+  }
+
+  .sidebar-wrapper .sidebar-menu .sidebar-dropdown div {
+    background: #2b2b2b;
+  }
+  .sidebar-wrapper .sidebar-menu .sidebar-dropdown > a:after {
+    content: "\f105";
+    font-family: FontAwesome;
+    font-weight: 400;
+    font-style: normal;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    background: 0 0;
+    speak: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    position: absolute;
+    right: 15px;
+    top: 14px;
+  }
+  .sidebar-wrapper .sidebar-menu .sidebar-dropdown .sidebar-submenu ul {
+    padding: 5px 0;
+  }
+
+  .sidebar-wrapper .sidebar-menu .sidebar-dropdown .sidebar-submenu li {
+    padding-left: 25px;
+    font-size: 22px;
+  }
+
+  .sidebar-wrapper .sidebar-menu .sidebar-dropdown .sidebar-submenu li a:before {
+    content: "\f10c";
+    font-family: FontAwesome;
+    font-weight: 400;
+    font-style: normal;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    speak: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin-right: 10px;
+    font-size: 10px;
+  }
+
+  .sidebar-wrapper .sidebar-menu ul li a span.label,
+  .sidebar-wrapper .sidebar-menu ul li a span.badge {
+    float: right;
+    margin-top: 8px;
+    margin-left: 5px;
+  }
+
+  .sidebar-wrapper .sidebar-menu .sidebar-dropdown .sidebar-submenu li a .badge,
+  .sidebar-wrapper .sidebar-menu .sidebar-dropdown .sidebar-submenu li a .label {
+    float: right;
+    margin-top: 0px;
+  }
+  .employee-form {
+    width: 340px;
+      margin: 50px auto;
+  }
+  .employee-form form{
+    margin-bottom: 15px;
+      background: white;
+      box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+      padding: 30px;
+  }
+  
+  .form-control, .btn {
+      min-height: 40px;
+      border-radius: 2px;
+      font-size: 18px;
+
+  }
+  .form-group {
+    height: 63px;
+  }
+  .btn {        
+    padding: 10px 20px 11px !important;
+    font-size: 19px !important;
+    background-color: #002266;
+    font-weight: bold;
+    
+    color: #ffffff;
+    border-radius: 100px;
+    -moz-border-radius: 100px;
+    -webkit-border-radius: 100px;
+    border: 1px solid #333;
+    cursor: pointer;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+    -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+    -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+  }
+  .navbar {
+    border-radius:0px;
+  }
+  
+  .navbar-brand {
+     float: left;
+     padding: 14px 0px;
+     font-size: 22px;
+  }
+  
+  .h3, h3{
+    font-size: 24px;
+  }
+
+  .navbar {
+    position: relative;
+    min-height: 66px
+    margin-bottom: 20px;
+    border: 1px solid;
+    
+  }
+  .navbar-right{
+    margin-right: 0px;
+    padding: 18px;
+    font-size: 22px;
+  }
+  .navbar-inverse{
+    background-color: #002266;
+  }
+  .navbar a {
+    color: white;
+  }
+  .btn {
+    background-color: #002266;
+  }
+  .input-group{
+    width: 290px;
+  }
+  .placeholder {
+    text-decoration-color: #333;
+  }
+  label {
+    text-align: left;
+    font-weight: 50;
+  }
+  body {
+    color: black;
+  }
+@media (min-width: 992px){
+  .cal-md-4 {
+    width: 103%;
+    float: left;
+  }
+
+  #wrapper {
+      padding-left: 250px;
+  }
+
+  #wrapper.toggled {
+      padding-left: 0;
+  }
+
+  #sidebar-wrapper {
+    width: 250px;
+    margin: -20px;
+    margin-left: -253px;
+  }
+
+  #wrapper.toggled #sidebar-wrapper {
+      width: 0;
+  }
+
+  #page-content-wrapper {
+      padding: 20px;
+      position: relative;
+  }
+
+  #wrapper.toggled #page-content-wrapper {
+      position: relative;
+      margin-right: 0;
+  }
+}
+</style>
+  </head>  
+<body>
+  <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse" style="height: 68px;">
+    <a class="navbar-brand" href="/dashboard#" style="color: white; margin: 8px;"><span class="glyphicon glyphicon-leaf w3-xxlarge" style="width:15px; margin-right: 5px;"></span> SK Solution</a>
+    <h3 class="text-center" style="color: white;">Create Employee</h3> 
+    <div class="navbar-right" style="margin-top: -55px;">
+      <a href="/employees"><span class="glyphicon glyphicon-off w3-xxlarge" style="width:15; margin-right: 10px; "></span>Logout</a>
+    </div>
+  </nav>
+
+  <div id="wrapper">
+    <div id="sidebar-wrapper" style="font-size: 18px;">
+      <nav name="dashboard" action="/dashboard"  method="post">
+        <ul class="sidebar-nav" style="font-size: 22px;">
+          <li class="sidebar-dropdown" >
+            <a href="#"><i class="glyphicon glyphicon-user" style="margin-right: 7px; icon-color; cornsilk; margin-left: -35px;"></i>Employee</a>
+            <div class="sidebar-submenu" style="display: none;">
+              <ul>
+                <li><a href="create" class="ml-2"> Create</a></li>
+              </ul>
+              <ul>
+                <li><a href="dashboard/profiles" onclick = "return validate()">Profiles</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <li>
+            <a href="/project"><i class="glyphicon glyphicon-credit-card" style="margin-right: 7px; icon-color; cornsilk; margin-left: -35px;"></i>Projects</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+    <form action="dashboard/create"  method="post">
+      <div class="row employee-form" style="width: 650px; height: 290px; margin-top: 200px;">
+        <div class="col-md-6" style="margin-top: -105px;">
+          <div class="form-group">
+            <label class="col-md-4 control-label" style="padding-left: 0px; margin-left: -74px; font-size: 22px;">Name</label>
+            <div class="col-md-4 inputGroupContainer">
+              <div class="input-group" style="padding-left: 35px;">
+                <input type="name" style="border-color: black; border-radius: 20px;" name="employee[name]" class="form-control" placeholder="Enter Name" id="name" required="required">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top: 45px;">
+            <label class="col-md-4 control-label" style="padding-left: 0px; margin-left: -74px; font-size: 22px;">Email</label>
+            <div class="col-md-4 inputGroupContainer">
+              <div class="input-group" style="padding-left: 35px;">
+                <input type="email" style="border-color: black; border-radius: 20px;" name="employee[email]" class="form-control" placeholder="Enter Email" id="email"  required="required">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top: 50px;">
+            <label class="col-md-4 control-label" style="padding-left: 0px; margin-left: -74px; font-size: 22px;">Qualification</label>
+            <div class="col-md-4 inputGroupContainer" style="padding-left: 50px;">
+              <div class="input-group" style="width: 258px;">
+                <input type="qualification" style="border-color: black; border-radius: 20px;" name="employee[qualification]" class="form-control" placeholder="Enter Qualification" id="qualification"  required="required">
+              </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6" style="margin-top: -105px;">
+        <div class="form-group">
+          <label class="col-md-4 control-label" style="padding-left: 92px; font-size: 22px; margin-left: -15px;">DOB</label>
+          <div class="col-md-4 inputGroupContainer" style="width: 340px; padding-left: 70px; margin-left: -74px; margin-right: -74px;">
+            <div class="input-group" style="width: 255px; padding-left: 0px; margin-left: 108px;">
+              <input type="dob"  style="border-color: black; border-radius: 20px;" name="employee[dob]" class="form-control" placeholder="YYYY/MM/DD" id="dob" required="required">
+            </div>
+          </div>
+        </div>
+     
+        <div class="form-group" style="margin-top: 45px;" >
+          <label class="col-md-4 control-label" style="padding-left: 92px; font-size: 22px; margin-left: -15px;">Project</label>
+          <div class="col-md-4 inputGroupContainer" style="width: 340px; padding-left: 70px; margin-left: -74px; margin-right: -74px;">
+            <div class="input-group" style="width: 255px; padding-left: 0px; margin-left: 108px;">
+              <input type="project" style="border-color: black; border-radius: 20px;"  name="employee[project]" class="form-control" placeholder="Enter Project" id="project" required="required">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-top: 50px;">
+          <label class="col-md-4 control-label" style="padding-left: 92px; font-size: 22px; margin-left: -15px; word-wrap: none;">Mobile#</label>
+         <div class="col-md-4 inputGroupContainer">
+            <div class="input-group" style="width: 252px; margin-left: 90px;">
+                <input type="mobile_number" style="border-color: black; border-radius: 20px;" name="employee[mobile_number]" class="form-control" placeholder="Enter Mobile Number" id="mobile number" required="required">
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+    <div class="text-center">
+      <button type="submit" onclick="return validate()" class="btn btn-primary" style="width: 117px; margin-left: 130px; margin-top: -220px;"><a href="employees"  id="statustoogle" ></a>Submit</button>
+    </div> 
+  </form>
+  
+  <!-- <div class="text-center" style="display: flex; align-items: center; justify-content: center;">
+   <img src="<%= image_url('sample2.jpg') %>">
+  </div> -->
+
+  <form id="status-form">
+    <h2 class="text-center"> Employee creation Successfully </h2>
+  </form>
+
+</body>
+<script type="text/javascript">
+    $(".sidebar-dropdown > a").click(function() {
+    $(".sidebar-submenu").slideUp(250);
+    if (
+      $(this)
+        .parent()
+        .hasClass("active")
+    ) {
+      $(".sidebar-dropdown").removeClass("active");
+      $(this)
+        .parent()
+        .removeClass("active");
+    } else {
+      $(".sidebar-dropdown").removeClass("active");
+      $(this)
+        .next(".sidebar-submenu")
+        .slideDown(250);
+      $(this)
+        .parent()
+        .addClass("active");
+    }
+    });
+
+    $("#toggle-sidebar").click(function() {
+      $(".page-wrapper").toggleClass("toggled");
+    });
+      
+  </script>
+</html>

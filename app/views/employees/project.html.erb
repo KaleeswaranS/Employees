@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<style type="text/css">
+
+	.table-responsive {
+		min-height: .01%;
+		overflow-x: auto;
+		box-sizing: border-box;
+	}
+	.table-bordered {
+		border: 1px solid #ddd;
+	}
+	.table {
+		width: 100%;
+		max-width: 100%;
+		margin-bottom: 20px;
+	}
+	table {
+		border-spacing: 0;
+		border-collapse: collapse;
+	}
+	.table-bordered>thead>tr>td,
+	.table-bordered>thead>tr>th {
+		border-bottom-width: 2px;
+		border: 1px solid;
+		padding: 8px;
+		line-height: 1.428
+	}
+	.table>thead>tr>th {
+		vertical-align: bottom;
+		padding: 8px;
+		line-height: 1.428;
+		text-align: center;
+	}
+	th {
+		text-align: left;
+		display: table-cell;
+	}
+	.thead {
+		display: table-header-group;
+		vertical-align: middle;
+		border-color: inherit;
+	}
+	.container-fluid {
+		padding-right: 15px;
+		padding-left: 15px;
+		margin-right: auto;
+		margin-left: auto;
+	}
+	tbody {
+		display: table-header-group;
+		vertical-align: middle;
+		border-color: inherit;
+	}
+
+	tr {
+	    border: 0px solid;
+		display: table-row;
+		vertical-align: inherit;
+		border-color: inherit;
+		text-align: center;
+	}
+	body {
+		font-size: 18px;
+		line-height: 1.426;
+		color: #333;
+	}
+
+	.table-responsive table,
+	.table-bordered table {
+	  border-collapse: collapse;
+	}
+	.table-bordered td,
+	.table-bordered th,
+	.table-responsive td,
+	.table-responsive th {
+	  border: 1px solid #ddd;
+	  padding: 5px 5px;
+	}
+	.table-responsive {
+	  width: 120px;
+	  float: left;
+	  position: fixed;
+	  overflow-x: scroll;
+	  white-space: nowrap;
+	  text-align: left;
+	  border: 0px solid #ddd;
+	  z-index: 2;
+	}
+	.table-bordered {
+	  width: calc(100% - 145px);
+	  right: 15px;
+	  position: fixed;
+	  overflow-x: scroll;
+	  border: 1px solid #ddd;
+	  white-space: nowrap;
+	}
+	.table-bordered td,
+	.table-bordered th {
+	  padding: 5px 10px;
+	}
+	.navbar {
+		width: 1440;
+		margin-left: -15px;
+		height: 54;
+    border-radius:0px;
+	  }
+
+  .navbar {
+    position: relative;
+    min-height: 66px
+    margin-bottom: 20px;
+    border: 1px solid;
+    
+  }
+  .navbar-right{
+    margin-right: 28px;
+    padding: 16px;
+  }
+  .navbar-inverse{
+    background-color: #6699ff;
+  }
+  .navbar a {
+    color: white;
+    font-size: 22px;
+  }
+  .navbar-brand {
+  	float: left;
+  	font-size: 22px;
+  	padding: 18px 15px;
+  }
+</style>
+</head>
+<body>
+	<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse" style="height: 68px;">
+    <a class="navbar-brand" href="/dashboard#" style="color: white; margin: 8px;"><span class="glyphicon glyphicon-leaf w3-xxlarge" style="width:15px; margin-right: 5px;"></span> SK Solution</a>
+    <h3 class="text-center" style="color: white;">Employee Project Details</h3> 
+    <div class="navbar-right" style="margin-top: -55px;">
+      <a href="/employees"><span class="glyphicon glyphicon-off w3-xxlarge" style="width:15; margin-right: 10px; "></span>Logout</a>
+    </div>
+  </nav>
+	<!-- <div class="container-fluid"> -->
+      <div class="table-responsive">
+	  <table class="table table-bordered table-hover" id="planHeaderTable">
+	    <thead class="thead-light" style="color: white; background-color: #6699ff;">
+	      <tr>
+	        <th scope="col" style="min-width: 100px">Name</th>
+	        <th scope="col" style="min-width: 100px">Project</th>
+	    </thead>
+	    <tbody>
+	      <% @employees.each do |p| %> 
+
+	    <tr id="header_<%= p.id %>" class="element-row"> 
+		    <input type="hidden" id="employee" value="<%= p.id %>">
+
+        <td class=" align-middle" id="name">
+          <%= p.name %>
+        </td> 
+        <td class="align-middle" id="project"><%= p.project%></td> 
+        <% end %> 
+      </tr>
+    </tbody>
+	   </table> 
+	   </div>    
+<!-- </div> -->
+</body>
+</html>

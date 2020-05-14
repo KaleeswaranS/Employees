@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   
+ 
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<%= javascript_include_tag "http://www.google.com/jsapi", "chartkick" %>
+<%= csrf_meta_tags %>
+
+  <script type="text/javascript">
+    function validate() {
+        var email = document.getElementById('Email').value;
+        var atpos=email.indexOf("@");
+        var dotpos=email.lastIndexOf(".");
+
+
+        if (atpos<1 || dotpos<atpos+2 || dotpos+2>=email.length)
+          {
+          alert("Not a valid e-mail address");
+          return false;
+          }
+        return true;
+    }
+  </script> 
+
+<style type="text/css">
+#wrapper {
+    display: flex;
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled {
+    padding-left: 250px;
+}
+
+#sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    left: 250px;
+    width: 0;
+    height: 100%;
+    margin-left: -250px;
+    overflow-y: auto;
+    background:#6699ff;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    width: 250px;
+
+}
+
+#page-content-wrapper {
+    width: 100%;
+    position: absolute;
+    padding: 15px;
+}
+
+#wrapper.toggled #page-content-wrapper {
+    position: absolute;
+    margin-right: -250px;
+}
+
+
+.sidebar-nav {
+    position: absolute;
+    top: 0px;
+    width: 230px;
+    margin: 0;
+    padding: 20px;
+    list-style: none;
+}
+
+.sidebar-nav li {
+    text-indent: 20px;
+    line-height: 30px;
+}
+
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+}
+
+.sidebar-nav li a:hover {
+    text-decoration: none;
+    color: #fff;
+    background: rgba(255,255,255,0.2);
+}
+
+.sidebar-nav > .sidebar-brand {
+    height: 65px;
+    font-size: 20px;
+    line-height: 60px;
+}
+
+.sidebar-nav > .sidebar-brand a {
+    color: white;
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
+    /*color: #fff;*/
+    background: none;
+}
+
+.sidebar-wrapper .sidebar-menu ul li:hover > a,
+.sidebar-wrapper .sidebar-menu .sidebar-dropdown.active > a {
+  color: #b3b8c1;
+}
+
+.sidebar-wrapper .sidebar-menu ul li a i {
+  margin-right: 10px;
+  font-size: 20px;
+  background: #2b2b2b;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  border-radius: 4px;
+}
+
+.sidebar-wrapper .sidebar-menu ul li a:hover > i::before {
+  animation: swing ease-in-out 0.5s 1 alternate;
+}
+
+.sidebar-wrapper .sidebar-menu .sidebar-dropdown div {
+  background: #2b2b2b;
+}
+.sidebar-wrapper .sidebar-menu .sidebar-dropdown > a:after {
+  content: "\f105";
+  font-family: FontAwesome;
+  font-weight: 400;
+  font-style: normal;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  background: 0 0;
+  speak: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: absolute;
+  right: 15px;
+  top: 14px;
+}
+.sidebar-wrapper .sidebar-menu .sidebar-dropdown .sidebar-submenu ul {
+  padding: 5px 0;
+}
+
+.sidebar-wrapper .sidebar-menu .sidebar-dropdown .sidebar-submenu li {
+  padding-left: 25px;
+  font-size: 17px;
+}
+
+.sidebar-wrapper .sidebar-menu .sidebar-dropdown .sidebar-submenu li a:before {
+  content: "\f10c";
+  font-family: FontAwesome;
+  font-weight: 400;
+  font-style: normal;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  speak: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin-right: 10px;
+  font-size: 10px;
+}
+
+.sidebar-wrapper .sidebar-menu ul li a span.label,
+.sidebar-wrapper .sidebar-menu ul li a span.badge {
+  float: right;
+  margin-top: 8px;
+  margin-left: 5px;
+}
+
+.sidebar-wrapper .sidebar-menu .sidebar-dropdown .sidebar-submenu li a .badge,
+.sidebar-wrapper .sidebar-menu .sidebar-dropdown .sidebar-submenu li a .label {
+  float: right;
+  margin-top: 0px;
+}
+
+.stretch-card > .card{
+  width: 100%;
+  min-width: 100%;
+}
+
+.card {
+  border: 0;
+  background: #fff;
+}
+ 
+.card .card-body{
+  padding: 2.5rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+
+.column {
+  float: left;
+  width: 25%;
+  padding: 0 10px;
+}
+
+.row {margin: 0 -5px;}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@media(min-width:768px) {
+  #wrapper {
+      padding-left: 250px;
+  }
+
+  #wrapper.toggled {
+      padding-left: 0;
+  }
+
+  #sidebar-wrapper {
+    width: 250px;
+    margin: 62px;
+    margin-left: -253px;
+  }
+
+  #wrapper.toggled #sidebar-wrapper {
+      width: 0;
+  }
+
+  #page-content-wrapper {
+      padding: 20px;
+      position: relative;
+  }
+
+  #wrapper.toggled #page-content-wrapper {
+      position: relative;
+      margin-right: 0;
+  }
+
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 10px;
+  }
+ 
+  h4,h3, .h3,.h4 {
+    font-family: none;
+    color: darkgreen;
+    line-height: 1.1;
+    font-weight: 500;
+  }
+
+  .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 16px;
+    text-align: center;
+    background-color: #f1f1f1;
+  }
+
+  .navbar {
+    border-radius:0px;
+  }
+
+  .navbar {
+    position: relative;
+    min-height: 66px
+    margin-bottom: 20px;
+    border: 1px solid;
+    
+  }
+  .navbar-right{
+    margin-right: 28px;
+    padding: 16px;
+  }
+  .navbar-inverse{
+    background-color:#002266;
+  }
+  .navbar a {
+    color: white;
+  }
+  .navbar-brand {
+    font-size: 20px;
+  }
+
+  .btn-group button {
+    background-color: #4CAF50; 
+    border: 1px solid green; 
+    color: white; 
+    padding: 10px 24px; 
+    cursor: pointer; 
+    float: left; 
+  }
+
+  .btn-group button:not(:last-child) {
+    border-right: none; 
+  }
+
+  .btn-group:after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+  .btn-group button:hover {
+    background-color: #3e8e41;
+  }
+  .v-application .pa-3{
+    padding: 12px!important;
+  }
+  .v-card{
+    margin-top:30px;
+    margin-bottom: 15px;
+  }
+  .theme--light.v-sheet{
+    background-color: #fff;
+  }
+  .row{
+    margin-left: 260px;
+    margin-right: 590px;
+  }
+  h6, .h6 {
+    font-size:23px;
+  }
+}
+
+</style>
+</head>
+<body>
+  <div id="wrapper" >
+    <div id="sidebar-wrapper" style="font-size: 18px;">
+      <nav name="dashboard" action="/dashboard"  method="post">
+        <ul class="sidebar-nav">
+          <li class="sidebar-brand">
+            <a href="#"><i class="glyphicon glyphicon-dashboard w3-xxlarge" style="margin-right: 7px; margin-left: -35px;"></i>Dashboard</a>
+          </li>
+          <li class="sidebar-dropdown">
+            <a href="#"><i class="glyphicon glyphicon-user" style="margin-right: 7px; icon-color; cornsilk; margin-left: -35px;"></i>Employee</a>
+            <div class="sidebar-submenu" style="display: none;">
+              <ul>
+                <li><a href="create" class="ml-2"> Create</a></li>
+              </ul>
+              <ul>
+                <li><a href="dashboard/profiles" onclick = "return validate()">Profiles</a></li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <a href="/project"><i class="glyphicon glyphicon-credit-card" style="margin-right: 7px; icon-color; cornsilk; margin-left: -35px;"></i>Projects</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</body>
+<head>
+<style type="text/css">
+
+  .employee-form {
+    width: 340px;
+      margin: 50px auto;
+  }
+    .employee-form tr{
+      margin-bottom: 15px;
+        background: #f7f7f7;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        padding: 30px;
+    }
+    .employee-form h2 {
+        margin: 0 0 15px;
+    }
+    .form-control, .btn {
+        min-height: 38px;
+        border-radius: 2px;
+    }
+    .btn {        
+        font-size: 15px;
+        font-weight: bold;
+    }
+
+    .btn {        
+        font-size: 15px;
+        font-weight: bold;
+        width: 130px;
+        height: 46px;
+        margin-inline-start: 1300px;
+    }
+    
+</style>
+</head>
+<body>
+  <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+    <a class="navbar-brand" style="color: white;"><span class="glyphicon glyphicon-leaf w3-xxlarge" style="width:15; margin-right: 5px;"></span> SK Solution</a>
+    <div class="navbar-right" style="font-size: 20px;" >
+      <a href="/employees"><span class="glyphicon glyphicon-off w3-xxlarge" style="width:15; margin-right: 10px; font-size: 20px;"></span>Logout</a>
+    </div>
+  </nav>
+
+  <div class="row">
+    <div class="column" style="width: 290px; height: 108px;">
+      <div class="card">
+        <h3><span class="glyphicon glyphicon-user"></span> EMPLOYEES</h3>
+          <h4 class="align-middle"><%= Employee.count(:all)%></h4> 
+      </div>
+    </div>
+
+    <div class="column" style="width: 290px; height: 108px;">
+      <div class="card">
+        <h3><span class="glyphicon glyphicon-credit-card"></span> PROJECTS</h3>
+         <h4 class="align-middle"><%= Employee.distinct.count('project')%></h4> 
+      </div>
+    </div>
+  </div>
+</body>
+
+  <body>
+    <div id="dashboard_div" style="margin-right:600px; margin-top: 50px; padding: 20px; margin-left: 255px;" >
+      <div class="card">
+        <%= column_chart @employees.group(:project).count, {library: {hAxis: {title: "Projects"}, vAxis: {title: "Project Count"}}} %>
+      </div>
+    </div>
+    <div id="dashboard_div" style="margin-right: 20px; margin-top: -370px; padding: 20px; margin-left: 850px;" >
+      <div class="card">
+          <%= pie_chart @employees.group(:name).count, {library: {legend: {title: "Employees By Projects"}}} %>
+      </div>
+    </div>
+  </body>
+
+  <script type="text/javascript">
+    $(".sidebar-dropdown > a").click(function() {
+    $(".sidebar-submenu").slideUp(250);
+    if (
+      $(this)
+        .parent()
+        .hasClass("active")
+    ) {
+      $(".sidebar-dropdown").removeClass("active");
+      $(this)
+        .parent()
+        .removeClass("active");
+    } else {
+      $(".sidebar-dropdown").removeClass("active");
+      $(this)
+        .next(".sidebar-submenu")
+        .slideDown(250);
+      $(this)
+        .parent()
+        .addClass("active");
+    }
+    });
+
+    $("#toggle-sidebar").click(function() {
+      $(".page-wrapper").toggleClass("toggled");
+    });
+  </script>
+</html>
